@@ -4,7 +4,14 @@ namespace App\Http\Controllers\Api\line;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+
+use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
+
 // use Illuminate\Http\Request;
 use Request;
 
@@ -31,17 +38,17 @@ class LineCallbackController extends Controller {
         $event = $json->events [0];
         
         $httpClient = new CurlHTTPClient (config('lineSdk.CHANNEL_ACCESS_TOKEN'));
-        $bot = new LINE\LINEBot ( $httpClient, ['channelSecret' => config('lineSdk.CHANNEL_SECRET')]);
+        $bot = new LINEBot ( $httpClient, ['channelSecret' => config('lineSdk.CHANNEL_SECRET')]);
         
         if ('user' == $event->source->type) {
             if ("postback" == $event->type) {
                 if ("1" == $event->postback->data) {
                     file_put_contents ( "php://stdout", "\n参加で受付ました。" );
-//                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder ( "参加で受付ました。" );
+//                     $textMessageBuilder = new TextMessageBuilder ( "参加で受付ました。" );
 //                     $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 } else if ("2" == $event->postback->data) {
                     file_put_contents ( "php://stdout", "\n不参加で受付ました。" );
-//                     $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder ( "不参加で受付ました。" );
+//                     $textMessageBuilder = new TextMessageBuilder ( "不参加で受付ました。" );
 //                     $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 }
                 return;
@@ -53,9 +60,11 @@ class LineCallbackController extends Controller {
                     file_put_contents ( "php://stdout", "\n".$inputText );
                     if ('参加可否入力' == $inputText) {
         
-                        $response = $bot->replyMessage ( $event->replyToken, new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder ( '参加しますか？', new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder ( '参加しますか？', [
-                                        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder ( "はい", "1" ),
-                                        new LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder ( 'いいえ', '2' )
+                        $response = $bot->replyMessage ( $event->replyToken, 
+                                        new TemplateMessageBuilder ( '参加しますか？', 
+                                                        new ConfirmTemplateBuilder ( '参加しますか？', [
+                                        new PostbackTemplateActionBuilder ( "はい", "1" ),
+                                        new PostbackTemplateActionBuilder ( 'いいえ', '2' )
                         ] ) ) );
         
 //                         if ($response->isSucceeded ()) {
@@ -66,7 +75,7 @@ class LineCallbackController extends Controller {
                         return;
                     } else if ('ユーザID取得' == $inputText) {
                         $replyMsg = $event->source->userId;
-                        $textMessageBuilder = new LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMsg);
+                        $textMessageBuilder = new TextMessageBuilder($replyMsg);
                         $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                         return;
                     } else if ('プロフィール取得' == $inputText) {
@@ -76,18 +85,18 @@ class LineCallbackController extends Controller {
 //                             $profileDispName = '[表示名]=' . $profile['displayName'];
 //                             $profilePictUrl = '[画像]=' . $profile['pictureUrl'];
 //                             $profileStatus = '[ステータス]=' . $profile['statusMessage'];
-//                             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder("あなたのプロフィール情報です。", $profileDispName, $profilePictUrl, $profileStatus);
+//                             $textMessageBuilder = new TextMessageBuilder("あなたのプロフィール情報です。", $profileDispName, $profilePictUrl, $profileStatus);
 //                             $response = $bot->replyMessage( $event->replyToken, $textMessageBuilder );
 //                             return;
 //                         } else {
-//                             $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder ( 'unknown' );
+//                             $textMessageBuilder = new TextMessageBuilder ( 'unknown' );
 //                             $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
 //                             return;
 //                         }
                     }
                 }
-//                 $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder ( $input );
-                //         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder ("aa\naa");
+//                 $textMessageBuilder = new TextMessageBuilder ( $input );
+                //         $textMessageBuilder = new TextMessageBuilder ("aa\naa");
 //                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
             }
