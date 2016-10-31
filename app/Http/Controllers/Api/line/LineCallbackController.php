@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 // use Illuminate\Http\Request;
 use Request;
-require_once __DIR__ . '/vendor/autoload.php';
+
 
 class LineCallbackController extends Controller {
     /**
@@ -31,7 +31,7 @@ class LineCallbackController extends Controller {
 file_put_contents ( "php://stdout", $input );
         
         echo "hoge!!!!";
-        file_put_contents ( "php://stdout", "\nACCESS\n".Config::get('app.CHANNEL_ACCESS_TOKEN') );
+        file_put_contents ( "php://stdout", "\nACCESS\n".config('app.CHANNEL_ACCESS_TOKEN') );
         return;
     }
 }
