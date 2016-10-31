@@ -29,8 +29,8 @@ class LineCallbackController extends Controller {
         $json = json_decode ( $input );
         $event = $json->events [0];
         
-//         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient (Config::get('app.CHANNEL_ACCESS_TOKEN'));
-//         $bot = new \LINE\LINEBot ( $httpClient, ['channelSecret' => Config::get('app.CHANNEL_SECRET')] );
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient (config('lineSdk.CHANNEL_ACCESS_TOKEN'));
+        $bot = new \LINE\LINEBot ( $httpClient, ['channelSecret' => config('lineSdk.CHANNEL_SECRET')]);
         
         if ('user' == $event->source->type) {
             if ("postback" == $event->type) {
@@ -52,10 +52,10 @@ class LineCallbackController extends Controller {
                     file_put_contents ( "php://stdout", "\n".$inputText );
                     if ('参加可否入力' == $inputText) {
         
-//                         $response = $bot->replyMessage ( $event->replyToken, new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder ( '参加しますか？', new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder ( '参加しますか？', [
-//                                         new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder ( "はい", "1" ),
-//                                         new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder ( 'いいえ', '2' )
-//                         ] ) ) );
+                        $response = $bot->replyMessage ( $event->replyToken, new \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder ( '参加しますか？', new \LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder ( '参加しますか？', [
+                                        new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder ( "はい", "1" ),
+                                        new \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder ( 'いいえ', '2' )
+                        ] ) ) );
         
 //                         if ($response->isSucceeded ()) {
 //                             file_put_contents ( "php://stdout", "\nisSucceeded\n" );
@@ -64,9 +64,9 @@ class LineCallbackController extends Controller {
 //                         }
                         return;
                     } else if ('ユーザID取得' == $inputText) {
-//                         $replyMsg = $event->source->userId;
-//                         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder ( $replyMsg );
-//                         $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
+                        $replyMsg = $event->source->userId;
+                        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($replyMsg);
+                        $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                         return;
                     } else if ('プロフィール取得' == $inputText) {
 //                         $res = $bot->getProfile ( $event->source->userId );
