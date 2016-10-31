@@ -17,6 +17,7 @@ Route::get ( 'hoge', function () {
     return view ( 'hoge' );
 } );
     Route::get('callback', 'Api\line\LineCallbackController@index');
+    Route::post('callback', 'Api\line\LineCallbackController@index');
     Route::get ( 'collback', function () {
         return view ( 'hoge' );
     } );
