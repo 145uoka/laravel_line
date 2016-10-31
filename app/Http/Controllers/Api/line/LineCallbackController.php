@@ -31,7 +31,7 @@ class LineCallbackController extends Controller {
 file_put_contents ( "php://stdout", $input );
         
         echo "hoge!!!!";
-        file_put_contents ( "php://stdout", "\nACCESS\n".config('app.CHANNEL_ACCESS_TOKEN') );
+        file_put_contents ( "php://stdout", "\nACCESS\n".config('lineSdk.CHANNEL_ACCESS_TOKEN') );
         return;
     }
 }
