@@ -18,6 +18,14 @@ Route::get ( 'hoge', function () {
 } );
 Route::get ( 'guest', 'Api\line\LineCallbackController@index' );
 Route::post ( 'callback', 'Api\line\LineCallbackController@index' );
+Route::post('edit', function()
+{
+    $body = Input::all();
+    if (empty($body)) {
+        return App::abort(400);
+    }
+    return Response::json($body);
+});
 Route::get ( 'collback', function () {
     return view ( 'hoge' );
 } );
