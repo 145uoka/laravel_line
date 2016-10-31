@@ -23,11 +23,10 @@ class LineCallbackController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $request = Request::instance(); // Access the instance
-        echo $request->getContent();
+//         $request = Request::instance(); // Access the instance
+//         echo $request->getContent();
         
-        $body = Input::all();
-        file_put_contents ( "php://stdout", "\n".$body );
+        file_get_contents('php://input');
         
         echo "hoge!!!!";
         file_put_contents ( "php://stdout", "\nhogehoge" );
