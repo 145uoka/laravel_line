@@ -30,7 +30,7 @@ class LineCallbackController extends Controller {
 file_put_contents ( "php://stdout", $input );
         
         echo "hoge!!!!";
-        file_put_contents ( "php://stdout", "\nhogehoge" );
+        file_put_contents ( "php://stdout", "\nACCESS\n".Config::get('app.CHANNEL_ACCESS_TOKEN') );
         return;
     }
 }
