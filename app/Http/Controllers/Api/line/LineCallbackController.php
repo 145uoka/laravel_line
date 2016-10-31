@@ -26,7 +26,8 @@ class LineCallbackController extends Controller {
 //         $request = Request::instance(); // Access the instance
 //         echo $request->getContent();
         
-        file_get_contents('php://input');
+        $input = file_get_contents ( 'php://input' );
+file_put_contents ( "php://stdout", $input );
         
         echo "hoge!!!!";
         file_put_contents ( "php://stdout", "\nhogehoge" );
