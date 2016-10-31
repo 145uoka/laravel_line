@@ -25,6 +25,7 @@ class LineCallbackController extends Controller {
     public function index() {
         $request = Request::instance(); // Access the instance
         echo $request->getContent();
+        echo "hoge!!!!";
         file_put_contents ( "php://stdout", $request->getContent() );
         return;
     }
