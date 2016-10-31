@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 // use Illuminate\Http\Request;
 use Request;
+require_once __DIR__ . '/vendor/autoload.php';
 
 class LineCallbackController extends Controller {
     /**
