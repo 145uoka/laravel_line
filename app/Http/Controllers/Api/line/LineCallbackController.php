@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\line;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 // use Illuminate\Http\Request;
 use Request;
 
@@ -29,7 +30,7 @@ class LineCallbackController extends Controller {
         $json = json_decode ( $input );
         $event = $json->events [0];
         
-        $httpClient = new LINE\LINEBot\HTTPClient\CurlHTTPClient (config('lineSdk.CHANNEL_ACCESS_TOKEN'));
+        $httpClient = new CurlHTTPClient (config('lineSdk.CHANNEL_ACCESS_TOKEN'));
         $bot = new LINE\LINEBot ( $httpClient, ['channelSecret' => config('lineSdk.CHANNEL_SECRET')]);
         
         if ('user' == $event->source->type) {
