@@ -14,9 +14,16 @@ use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
 
+/**
+ * LineMessagingApi_PushMessageサンプル.
+ * @author kenta
+ *
+ */
 class SendMsgController extends Controller
 {
-    //
+    /**
+     * 145宛てにメッセージ「hoge」を送信
+     */
     public function index() {
         // line-bot
         $httpClient = new CurlHTTPClient ( config ( 'lineSdk.CHANNEL_ACCESS_TOKEN' ) );
@@ -24,8 +31,11 @@ class SendMsgController extends Controller
                         'channelSecret' => config ( 'lineSdk.CHANNEL_SECRET' ) 
         ] );
         
+        $userId = 'Ub0b37e268b2143fb40b997ca6a5b0820';
+        
         $textMessageBuilder = new TextMessageBuilder('hello');
-        $response = $bot->pushMessage('Ub0b37e268b2143fb40b997ca6a5b0820', $textMessageBuilder);
-        echo "hoge";
+        $response = $bot->pushMessage($userId, $textMessageBuilder);
+        
+        http_response_code (404);
     }
 }

@@ -24,15 +24,16 @@ class LineCallbackController extends Controller {
     }
     
     /**
-     * Show the application dashboard.
+     * LineBotからのCallBack処理
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
         
-        // http-bodyの取得
+        // inputの取得
         $input = file_get_contents ( 'php://input' );
         $json = json_decode ( $input );
+        
         $event = $json->events [0];
         
         // line-bot
