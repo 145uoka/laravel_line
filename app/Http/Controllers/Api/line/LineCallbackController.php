@@ -106,7 +106,7 @@ class LineCallbackController extends Controller {
                 ] ) ) ;
                 
                 
-                $response = $bot->replyMessage ( $event->replyToken, [$tempA, $tempA]);
+                $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
 //                 $textMessageBuilder = new TextMessageBuilder ( $input );
 //                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
