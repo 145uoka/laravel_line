@@ -98,15 +98,15 @@ class LineCallbackController extends Controller {
                     }
                 }
                 
-                $bot->replyMessage ( $event->replyToken, new ButtonTemplateBuilder (
-                                'title', 'text', null, 
-                                new ButtonTemplateBuilder ( '参加しますか？', [
+                $response = $bot->replyMessage ( $event->replyToken, new TemplateMessageBuilder (
+                                'alt',
+                                new ButtonTemplateBuilder ( 'title', 'text', null,  [
                                 new PostbackTemplateActionBuilder ( "はい", "1" ),
                                 new PostbackTemplateActionBuilder ( 'いいえ', '2' )
                 ] ) ) );
                 
-                $textMessageBuilder = new TextMessageBuilder ( $input );
-                $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
+//                 $textMessageBuilder = new TextMessageBuilder ( $input );
+//                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
             }
         } else {
