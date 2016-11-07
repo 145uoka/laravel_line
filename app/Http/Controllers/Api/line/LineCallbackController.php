@@ -9,6 +9,7 @@ use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
 use LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
+use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
@@ -102,7 +103,7 @@ class LineCallbackController extends Controller {
                                 'alt',
                                 new ButtonTemplateBuilder ( 'title', 'text', null,  [
                                 new PostbackTemplateActionBuilder ( "はい", "1" ),
-                                new PostbackTemplateActionBuilder ( 'いいえ', '2' )
+                                new UriTemplateActionBuilder ( 'google', 'https://www.google.co.jp/' )
                 ] ) ) ;
                 
                 
