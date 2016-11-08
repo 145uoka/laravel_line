@@ -14,8 +14,8 @@
 <div class="form-horizontal ">
 
 <div class="form-group">
-    <label for="name" class="control-label col-sm-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
-    <div class="col-sm-6">
+    <label for="name" class="control-label col-sm-offset-2 col-sm-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
+    <div class="col-sm-3">
       <select class="form-control" id="number" name="number">
         <option value="1" selected="selected">指名なし</option>
         <option value="2">スタイリスト</option>
@@ -24,8 +24,8 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="number" class="control-label col-sm-3">{!! Lang::get('langCommon.COURSE') !!}</label>
-    <div class="col-sm-6">
+    <label for="number" class="control-label col-sm-offset-2 col-sm-3">{!! Lang::get('langCommon.COURSE') !!}</label>
+    <div class="col-sm-3">
       <select class="form-control" id="number" name="number">
         <option value="1" selected="selected">カット</option>
         <option value="2">パーマ</option>
