@@ -103,7 +103,7 @@ class LineCallbackController extends Controller {
                                 'alt',
                                 new ButtonTemplateBuilder ( 'title', 'text', null,  [
                                 new PostbackTemplateActionBuilder ( "はい", "1" ),
-                                new UriTemplateActionBuilder ( '予約', 'https://laravel-line.herokuapp.com/' )
+                                new UriTemplateActionBuilder ( '予約', 'https://laravel-line.herokuapp.com/reserve' )
                 ] ) ) ;
                 
                 
