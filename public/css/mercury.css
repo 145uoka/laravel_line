@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+base_color {
+    
+}
+
+.main_color {
+	background-color:#b8b0ce;
+}
+
+accent_color {
+	
+}
+
+.footer {
+	text-align:center;
+	color:#b8b0ce;
+}
