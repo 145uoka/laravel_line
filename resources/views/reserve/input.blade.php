@@ -13,25 +13,31 @@
 {!! Form::open(['url' => '/']) !!}
 <div class="form-horizontal ">
 
-<div class="form-group">
-    <label for="name" class="control-label col-xs-offset-3 col-xs-2">{!! Lang::get('langCommon.CHARGE') !!}</label>
-    <div class="col-xs-2">
+  <div class="form-group">
+    <div class="col-xs-1"></div>
+    <label for="name" class="control-label col-xs-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
+    <div class="col-xs-7">
       <select class="form-control" id="number" name="number">
         <option value="1" selected="selected">指名なし</option>
         <option value="2">スタイリスト</option>
         <option value="3">アーティスト</option>
       </select>
     </div>
+    <div class="col-xs-1"></div>
   </div>
-  <div class="form-group">
-    <label for="number" class="control-label col-xs-offset-3 col-xs-2">{!! Lang::get('langCommon.COURSE') !!}</label>
-    <div class="col-xs-2">
+  <div class="form-group row">
+  <div class="col-xs-1"></div>
+    <div class="col-xs-3">
+      <label for="number" class="control-label">{!! Lang::get('langCommon.COURSE') !!}</label>
+    </div>
+    <div class="col-xs-7">
       <select class="form-control" id="number" name="number">
         <option value="1" selected="selected">カット</option>
         <option value="2">パーマ</option>
         <option value="3">カラー</option>
       </select>
     </div>
+    <div class="col-xs-1"></div>
   </div>
     <div class="col-xs-offset-5 col-xs-2 text-center">
       <button type="submit" class="btn btn-primary">{!! Lang::get('formItem.search') !!}</button>
