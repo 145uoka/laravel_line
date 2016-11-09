@@ -17,9 +17,15 @@ class ReserveController extends Controller
     public function index()
     {
         //
-        return view ( 'reserve.input' );
+        return view ( 'reserve.search' );
     }
 
+    
+    public function search()
+    {
+        //
+        return view ( 'reserve.search' );
+    }
     /**
      * Show the form for creating a new resource.
      *

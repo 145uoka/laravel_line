@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta http-equiv="content-language" content="ja">
 @yield('after_common_meta')
 
 <!-- fonts -->
@@ -15,7 +16,7 @@
 <!-- styles -->
 @yield('before_common_style')
 <link href="/css/vendor/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="/css/mercury.css" rel="stylesheet" type="text/css">
+<link href="/css/site.css" rel="stylesheet" type="text/css">
 @yield('after_common_style')
 
 <!-- javascript -->

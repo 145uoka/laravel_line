@@ -19,3 +19,4 @@ Route::get ( 'hoge', function () {
 Route::post ( 'callback', 'Api\line\LineCallbackController@index' );
 Route::get ( 'push', 'Sample\SendMsgController@index' );
 Route::get ( 'reserve', 'Web\ReserveController@index' );
+Route::post ( 'reserve/search', 'Web\ReserveController@search' );

@@ -10,35 +10,39 @@
 @endsection
 @section('content_body')
 
-{!! Form::open(['url' => '/']) !!}
+{!! Form::open(['url' => 'reserve/search']) !!}
 <div class="form-horizontal ">
 
   <div class="form-group">
-    <div class="col-xs-1"></div>
-    <label for="name" class="control-label col-xs-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
-    <div class="col-xs-7">
-      <select class="form-control" id="number" name="number">
+    <div class="col-sm-1"></div>
+    <label for="name" class="control-label col-sm-3">
+    <font><font>{!! Lang::get('langCommon.CHARGE') !!}</font></font>
+    </label>
+    <div class="col-sm-7">
+      <select class="form-control" id="name">
         <option value="1" selected="selected">指名なし</option>
         <option value="2">スタイリスト</option>
         <option value="3">アーティスト</option>
       </select>
     </div>
-    <div class="col-xs-1"></div>
+    <div class="col-sm-1"></div>
   </div>
-  <div class="form-group row">
-  <div class="col-xs-1"></div>
-    <label for="number" class="control-label col-xs-3">{!! Lang::get('langCommon.COURSE') !!}</label>
-    <div class="col-xs-7">
+  <div class="form-group">
+  <div class="col-sm-1"></div>
+    <label for="number" class="control-label col-sm-3">{!! Lang::get('langCommon.COURSE') !!}</label>
+    <div class="col-sm-7">
       <select class="form-control" id="number" name="number">
         <option value="1" selected="selected">カット</option>
         <option value="2">パーマ</option>
         <option value="3">カラー</option>
       </select>
     </div>
-    <div class="col-xs-1"></div>
+    <div class="col-sm-1"></div>
   </div>
-    <div class="col-xs-offset-5 col-xs-2 text-center">
-      <button type="submit" class="btn btn-primary">{!! Lang::get('formItem.search') !!}</button>
+    <div class="col-sm-offset-5 col-sm-2 text-center">
+      <button type="submit" class="btn btn-primary">
+        <i class="glyphicon glyphicon-search"></i>&nbsp;{!! Lang::get('formItem.search') !!}
+      </button>
     </div>
   </div>
 {!! Form::close() !!}
