@@ -27,9 +27,7 @@
   </div>
   <div class="form-group row">
   <div class="col-xs-1"></div>
-    <div class="col-xs-3">
-      <label for="number" class="control-label">{!! Lang::get('langCommon.COURSE') !!}</label>
-    </div>
+    <label for="number" class="control-label col-xs-3">{!! Lang::get('langCommon.COURSE') !!}</label>
     <div class="col-xs-7">
       <select class="form-control" id="number" name="number">
         <option value="1" selected="selected">カット</option>
