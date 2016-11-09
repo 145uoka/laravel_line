@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="container">
-
       @yield('content_title')
       <hr />
       @yield('content_body')

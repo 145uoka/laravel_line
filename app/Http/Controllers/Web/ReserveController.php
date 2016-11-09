@@ -24,7 +24,7 @@ class ReserveController extends Controller
     public function search()
     {
         //
-        return view ( 'reserve.search' );
+        return view ( 'reserve.reserve' );
     }
     /**
      * Show the form for creating a new resource.
