@@ -9,17 +9,17 @@
 
 {!! Form::open(['url' => 'reserve/search']) !!}
 <div class="panel panel-default">
-  <div class="panel-heading">{!! Lang::get('langCommon.COURSE_SELECT') !!}</div>
+  <div class="panel-heading accent_color">{!! Lang::get('langCommon.COURSE_SELECT') !!}</div>
   <div class="panel-body">
 
     <div class="form-horizontal ">
-    {!! Lang::get('langDescription.reseve.INPUT_COURSE_DETAIL') !!}<br />
-    {!! Lang::get('langDescription.reseve.CONFIRM_TELL') !!}
+    {!! Lang::get('langDescription.reserve.search.INPUT_COURSE_DETAIL') !!}<br />
+    {!! Lang::get('langDescription.reserve.search.CONFIRM_TELL') !!}
     <p />
       <div class="form-group">
         <div class="col-sm-1"></div>
         <label for="name" class="control-label col-sm-3">
-          {!! Lang::get('langCommon.CUSTOMER_TELL') !!}
+          {!! Lang::get('langCommon.TELL') !!}
           @include('layouts.common.requiredInput')
         </label>
         <div class="col-sm-7">{!! Form::number('store_name_jp', '090xxxxxxxx', ['class' => 'form-control']) !!}</div>
@@ -53,12 +53,13 @@
       </div>
       <div class="col-sm-offset-5 col-sm-2 text-center">
         <button type="submit" class="btn btn-primary">
-          <i class="glyphicon glyphicon-search"></i>&nbsp;{!! Lang::get('formItem.CHECK_RESERVE_AVAILABIRITY') !!}
+          <i class="glyphicon glyphicon-search"></i>&nbsp;{!! Lang::get('formItem.CHECK_RESERVE_AVAILABIRITY_TIME') !!}
         </button>
       </div>
     </div>
   </div>
 </div>
+
 <div class="panel panel-default">
   <div class="panel-heading">{!! Lang::get('langCommon.PRICE') !!}</div>
   <div class="panel-body">
@@ -70,7 +71,7 @@
     </table>
     <table class="table table-bordered table-striped">
       <thead>
-        <tr>
+        <tr class="active">
           <th class="text-center">{!! Lang::get('langCommon.COURSE') !!}</th>
           <th class="text-center">{!! Lang::get('langCommon.PRICE') !!}</th>
         </tr>

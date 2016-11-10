@@ -5,7 +5,10 @@ return [
                 'COURSE' => 'コース',
                 'PRICE' => '料金',
                 'RESERVE_DETAIL' => '予約内容',
-                'CUSTOMER_TELL' => '予約者電話番号',
+                'RESERVE_CONFIRM' => '予約確認',
+                'TELL' => '電話番号',
                 'CHARGE_PRICE' => '指名料',
                 'COURSE_SELECT' => 'コース選択',
+                'RESERVE_AVAILABIRITY_TIME' => 'ご案内可能時間',
+                'RESERVE_TIME' => 'ご案内時間',
 ];

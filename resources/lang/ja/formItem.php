@@ -6,6 +6,6 @@ return [
                 'modify' => '更新',
                 'search' => '検索',
                 'back' => '戻る',
-                'CHECK_RESERVE_AVAILABIRITY' => 'ご案内可能時間検索' 
+                'CHECK_RESERVE_AVAILABIRITY_TIME' => 'ご案内可能時間検索' 
 ]
 ;

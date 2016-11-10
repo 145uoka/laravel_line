@@ -5,11 +5,11 @@ base_color {
 }
 
 .main_color {
-	background-color:#bbdbf3;
+	background-color:#bbdbf3 !important;
 }
 
-accent_color {
-	
+.accent_color {
+	background-color:#bbdbf3 !important;
 }
 
 .footer {
