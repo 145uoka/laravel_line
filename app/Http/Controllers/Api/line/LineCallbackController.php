@@ -96,16 +96,21 @@ class LineCallbackController extends Controller {
                             $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                             return;
                         }
+                    } else if ('予約' == $inputText) {
+                        $tempA = new TemplateMessageBuilder ( 'alt', new ButtonTemplateBuilder ( '予約機能', '以下から行いたい操作を選択してください。', null, [ 
+                                        new UriTemplateActionBuilder ( '予約受付', 'https://laravel-line.herokuapp.com/reserve' ),
+                                        new PostbackTemplateActionBuilder ( "予約確認", "1" )
+                        ] ) );
+                        
+                        $response = $bot->replyMessage ( $event->replyToken, $tempA );
                     }
                 }
                 
-                $tempA = new TemplateMessageBuilder (
-                                'alt',
+                $tempA = new TemplateMessageBuilder ( 'alt',
                                 new ButtonTemplateBuilder ( 'title', 'text', null,  [
                                 new PostbackTemplateActionBuilder ( "はい", "1" ),
                                 new UriTemplateActionBuilder ( '予約', 'https://laravel-line.herokuapp.com/reserve' )
                 ] ) ) ;
-                
                 
                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
