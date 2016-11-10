@@ -1,0 +1,1 @@
+<font class="text-danger">&#40;{!! Lang::get('langCommon.REQUIRED_INPUT') !!}&#41;</font>
