@@ -10,6 +10,10 @@
  * | and give it the controller to call when that URI is requested.
  * |
  */
+if (app()->environment('production')) {
+    URL::forceScheme('https');
+}
+
 Route::get ( '/', function () {
     return view ( 'home' );
 } );
