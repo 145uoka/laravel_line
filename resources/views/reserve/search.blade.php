@@ -22,7 +22,7 @@
           {!! Lang::get('langCommon.TELL') !!}
           @include('layouts.common.requiredInput')
         </label>
-        <div class="col-sm-7">{!! Form::number('store_name_jp', '090xxxxxxxx', ['class' => 'form-control']) !!}</div>
+        <div class="col-sm-7">{!! Form::number('store_name_jp', '09099999999', ['class' => 'form-control']) !!}</div>
         <div class="col-sm-1"></div>
       </div>
       <div class="form-group">
@@ -44,9 +44,9 @@
           @include('layouts.common.requiredInput')</label>
         <div class="col-sm-7">
           <select class="form-control" id="number" name="number">
-            <option value="1" selected="selected">カット</option>
-            <option value="2">パーマ</option>
-            <option value="3">カラー</option>
+              @foreach($courses as $course)
+                <option value="{{{ $course->course_id }}}" >{{{ $course->course_name }}}&nbsp;-&nbsp;{{{ $course->prise }}}</option>
+              @endforeach
           </select>
         </div>
         <div class="col-sm-1"></div>

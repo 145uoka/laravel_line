@@ -3,8 +3,9 @@
 @yield('before_common_meta')
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <meta http-equiv="content-language" content="ja">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="google" content="notranslate" />
 @yield('after_common_meta')
 
 <!-- fonts -->

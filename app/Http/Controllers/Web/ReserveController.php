@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Models\TShops;
+use App\Models\TCourses;
 use App\Http\Controllers\Controller;
 
 class ReserveController extends Controller
@@ -17,7 +18,9 @@ class ReserveController extends Controller
     public function index()
     {
         //
-        return view ( 'reserve.search' );
+        $shop = TShops::find('1');
+        $courses = TCourses::where('shop_id', '1')->orderBy('order_no', 'ASC')->get();
+        return view ( 'reserve.search')->with ( compact ( 'courses' ) );
     }
 
     
