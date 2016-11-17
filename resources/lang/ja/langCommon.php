@@ -11,4 +11,8 @@ return [
                 'COURSE_SELECT' => 'コース選択',
                 'RESERVE_AVAILABIRITY_TIME' => 'ご案内可能時間',
                 'RESERVE_TIME' => 'ご案内時間',
+                'SELECT_DEFFAULT' => [
+                                'COURSE' =>'選択してください',
+                                'CHARGE_NOTHING' =>'指名なし'
+                ]
 ];

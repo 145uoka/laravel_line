@@ -30,7 +30,7 @@
         <label for="name" class="control-label col-sm-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
         <div class="col-sm-7">
           <select class="form-control" id="name">
-            <option value="1" selected="selected">指名なし</option>
+            <option value="">{!! Lang::get('langCommon.SELECT_DEFFAULT.CHARGE_NOTHING') !!}</option>
             <option value="2">スタイリスト</option>
             <option value="3">アーティスト</option>
           </select>
@@ -44,8 +44,9 @@
           @include('layouts.common.requiredInput')</label>
         <div class="col-sm-7">
           <select class="form-control" id="number" name="number">
+              <option value="">{!! Lang::get('langCommon.SELECT_DEFFAULT.COURSE') !!}</option>
               @foreach($courses as $course)
-                <option value="{{{ $course->course_id }}}" >{{{ $course->course_name }}}&nbsp;-&nbsp;{{{ $course->prise }}}</option>
+                <option value="{{{ $course->course_id }}}" >{{{ $course->course_name }}}&nbsp;-&nbsp;&#091;&yen;{{{ number_format($course->prise) }}}&#093;</option>
               @endforeach
           </select>
         </div>
@@ -77,18 +78,12 @@
         </tr>
       </thead>
       <tbody>
+        @foreach($courses as $course)
         <tr>
-          <td class="text-center">カット</td>
-          <td class="text-center">¥5,000</td>
+          <td class="text-center">{{{ $course->course_name }}}</td>
+          <td class="text-center">&yen;{{{ number_format($course->prise) }}}</td>
         </tr>
-        <tr>
-          <td class="text-center">パーマ</td>
-          <td class="text-center">¥8,000</td>
-        </tr>
-        <tr>
-          <td class="text-center">カラー</td>
-          <td class="text-center">¥5,500</td>
-        </tr>
+        @endforeach
       </tbody>
     </table>
   </div>
