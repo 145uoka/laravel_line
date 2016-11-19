@@ -112,10 +112,10 @@ class LineCallbackController extends Controller {
                                 new UriTemplateActionBuilder ( '予約', 'https://laravel-line.herokuapp.com/reserve' )
                 ] ) ) ;
                 
-                $response = $bot->replyMessage ( $event->replyToken, $tempA);
+//                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
-//                 $textMessageBuilder = new TextMessageBuilder ( $input );
-//                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
+                $textMessageBuilder = new TextMessageBuilder ( $input );
+                $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
             }
         } else {
