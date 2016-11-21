@@ -17,14 +17,7 @@ class TAppointmentsSeeder extends Seeder {
         TAppointments::create ( array (
                         'shop_id' => 1,
                         'order_no' => 1,
-                        'display_name' => 'スタイリスト',
-                        'price' => 500 
-        ) );
-        
-        TAppointments::create ( array (
-                        'shop_id' => 1,
-                        'order_no' => 2,
-                        'display_name' => 'アーティスト',
+                        'display_name' => '指名',
                         'price' => 1000 
         ) );
     }

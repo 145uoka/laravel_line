@@ -17,16 +17,7 @@
     {!! Lang::get('langDescription.reserve.search.CONFIRM_TELL') !!}
     <p />
     
-    {{-- エラーの表示を追加 --}}
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+      {{-- 電話番号 --}}
       <div class="form-group">
         <div class="col-sm-1"></div>
         <label for="name" class="control-label col-sm-3">
@@ -36,6 +27,8 @@
         <div class="col-sm-7">{!! Form::number('telephone', '09099999999', ['class' => 'form-control']) !!}</div>
         <div class="col-sm-1"></div>
       </div>
+      
+      {{-- 指名選択 --}}
       <div class="form-group">
         <div class="col-sm-1"></div>
         <label for="name" class="control-label col-sm-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
@@ -49,7 +42,9 @@
         </div>
         <div class="col-sm-1"></div>
       </div>
-      <div class="form-group">
+      
+      {{-- コース選択 --}}
+      <div class="form-group @if(!empty($errors->first('course_id'))) has-error @endif">
         <div class="col-sm-1"></div>
         <label for="course_id" class="control-label col-sm-3">
           {!! Lang::get('langCommon.COURSE') !!}
@@ -63,6 +58,7 @@
                 @endif
               @endforeach
           </select>
+          <span class="help-block">{{$errors->first('course_id')}}</span>
         </div>
         <div class="col-sm-1"></div>
       </div>

@@ -17,7 +17,7 @@ class CreateTStaffs extends Migration
             $table->increments ( 'staff_id' )->comment ( 'スタッフID' );
             $table->integer ( 'shop_id' )->comment ( '店舗ID' );
             $table->string ( 'name', 10 )->nullable ()->comment ( '名前' );
-            $table->integer ( 'age' )->nullable ()->comment ( '年齢' );
+            $table->string('age', 10)->nullable()->comment ( '年齢');
             $table->text ( 'introduction' )->nullable ()->comment ( '紹介文' );
             $table->timestamps ();
             
