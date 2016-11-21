@@ -1,24 +1,24 @@
 <?php
-
 use Illuminate\Database\Seeder;
 use App\Models\TShops;
-
-class TShopsSeeder extends Seeder
-{
+class TShopsSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
-        //
-        DB::table('t_shops')->delete();
+    public function run() {
+        // T_店舗のSeeder
         
+        // DELETE文
+        DB::table ( 't_shops' )->delete ();
+        
+        // INSERT文
         TShops::create ( array (
+                        'shop_id' => 1,
                         'shop_name' => 'JEWEL',
-                        'telephone' => 'xxx-xxxx-xxxx',
-                        'address' => 'yyyy-zzz-zzz' 
+                        'telephone' => 'xxxx-xxx-xxxx',
+                        'address' => 'yyyyzzzzxxxx' 
         ) );
     }
 }

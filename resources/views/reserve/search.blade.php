@@ -16,13 +16,24 @@
     {!! Lang::get('langDescription.reserve.search.INPUT_COURSE_DETAIL') !!}<br />
     {!! Lang::get('langDescription.reserve.search.CONFIRM_TELL') !!}
     <p />
+    
+    {{-- エラーの表示を追加 --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
       <div class="form-group">
         <div class="col-sm-1"></div>
         <label for="name" class="control-label col-sm-3">
           {!! Lang::get('langCommon.TELL') !!}
           @include('layouts.common.requiredInput')
         </label>
-        <div class="col-sm-7">{!! Form::number('store_name_jp', '09099999999', ['class' => 'form-control']) !!}</div>
+        <div class="col-sm-7">{!! Form::number('telephone', '09099999999', ['class' => 'form-control']) !!}</div>
         <div class="col-sm-1"></div>
       </div>
       <div class="form-group">
@@ -31,22 +42,25 @@
         <div class="col-sm-7">
           <select class="form-control" id="name">
             <option value="">{!! Lang::get('langCommon.SELECT_DEFFAULT.CHARGE_NOTHING') !!}</option>
-            <option value="2">スタイリスト</option>
-            <option value="3">アーティスト</option>
+            @foreach($workToDayStaffs as $workToDayStaff)
+            <option value="{{{ $workToDayStaff->staff_id }}}" >{{{ $workToDayStaff->name }}}&nbsp;-&nbsp;&#091;{{{ $workToDayStaff->age }}}&#093;</option>
+            @endforeach
           </select>
         </div>
         <div class="col-sm-1"></div>
       </div>
       <div class="form-group">
         <div class="col-sm-1"></div>
-        <label for="number" class="control-label col-sm-3">
+        <label for="course_id" class="control-label col-sm-3">
           {!! Lang::get('langCommon.COURSE') !!}
           @include('layouts.common.requiredInput')</label>
         <div class="col-sm-7">
-          <select class="form-control" id="number" name="number">
+          <select class="form-control" id="course_id" name="course_id">
               <option value="">{!! Lang::get('langCommon.SELECT_DEFFAULT.COURSE') !!}</option>
               @foreach($courses as $course)
-                <option value="{{{ $course->course_id }}}" >{{{ $course->course_name }}}&nbsp;-&nbsp;&#091;&yen;{{{ number_format($course->prise) }}}&#093;</option>
+                @if ($course->isExtension === false)
+                  <option value="{{{ $course->course_id }}}" >{{{ $course->course_name }}}&nbsp;-&nbsp;&#091;&yen;{{{ number_format($course->price) }}}&#093;</option>
+                @endif
               @endforeach
           </select>
         </div>
@@ -65,12 +79,6 @@
   <div class="panel-heading">{!! Lang::get('langCommon.PRICE') !!}</div>
   <div class="panel-body">
     <table class="table table-bordered table-striped">
-      <tr>
-        <th class="text-center">{!! Lang::get('langCommon.CHARGE_PRICE') !!}</th>
-        <td class="text-center">¥1,000</td>
-      </tr>
-    </table>
-    <table class="table table-bordered table-striped">
       <thead>
         <tr class="active">
           <th class="text-center">{!! Lang::get('langCommon.COURSE') !!}</th>
@@ -79,13 +87,42 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-        <tr>
-          <td class="text-center">{{{ $course->course_name }}}</td>
-          <td class="text-center">&yen;{{{ number_format($course->prise) }}}</td>
-        </tr>
+          @if ($course->isExtension === false)
+            <tr>
+              <td class="text-center">{{{ $course->course_name }}}</td>
+              <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
+            </tr>
+          @endif
         @endforeach
       </tbody>
     </table>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr class="active">
+          <th class="text-center">{!! Lang::get('langCommon.EXTENSION') !!}</th>
+          <th class="text-center">{!! Lang::get('langCommon.PRICE') !!}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @foreach($courses as $course)
+          @if ($course->isExtension === true)
+            <tr>
+              <td class="text-center">{{{ $course->course_name }}}</td>
+              <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
+            </tr>
+          @endif
+        @endforeach
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped">
+        @foreach($appointments as $appointment)
+        <tr>
+          <th class="text-center">{{{ $appointment->display_name }}}</th>
+          <td class="text-center">&yen;{{{ number_format($appointment->price) }}}</td> 
+        </tr>
+        @endforeach
+    </table>
+    
   </div>
 </div>
 

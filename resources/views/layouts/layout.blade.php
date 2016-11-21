@@ -16,8 +16,8 @@ body {
 </head>
 
 <body id="app-layout">
-  <nav class="navbar navbar-default main_color">
-    <div class="container">
+  <nav class="navbar navbar-default navbar-fixed-top main_color"　role="navigation">
+    <div class="container-fluid">
       <div class="navbar-header">
         <!-- Branding Image -->
         <span class="navbar-brand">{!! Lang::get('langApp.home_name') !!} </span>

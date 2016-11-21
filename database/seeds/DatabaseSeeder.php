@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(TShopsSeeder::class);
         $this->call(TCoursesSeeder::class);
-
+        $this->call(TAppointmentsSeeder::class);
+        $this->call(TStaffsSeeder::class);
+        $this->call(TWorkDaysSeeder::class);
+        
         Model::reguard();
     }
 }

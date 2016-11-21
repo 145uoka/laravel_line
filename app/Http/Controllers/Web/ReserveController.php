@@ -4,8 +4,14 @@ namespace App\Http\Controllers\Web;
 
 use Illuminate\Http\Request;
 
+use Crypt;
+use DB;
+use Input;
 use App\Models\TShops;
 use App\Models\TCourses;
+use App\Models\TAppointments;
+use App\Models\TWorkDays;
+use App\Models\TStaffs;
 use App\Http\Controllers\Controller;
 
 class ReserveController extends Controller
@@ -18,15 +24,42 @@ class ReserveController extends Controller
     public function index()
     {
         //
-        $shop = TShops::find('1');
-        $courses = TCourses::where('shop_id', '1')->orderBy('order_no', 'ASC')->get();
-        return view ( 'reserve.search')->with ( compact ( 'courses' ) );
+        $shopId = '1';
+        $today = '20161120';
+        $timeNow = '1030';
+        
+        $shop = TShops::find ($shopId);
+        
+        // SELECT:T_指名
+        $appointments = TAppointments::where ( 'shop_id', $shopId )->orderBy ( 'order_no', 'ASC' )->get ();
+        // SELECT:T_コース
+        $courses = TCourses::where ( 'shop_id', $shopId )->orderBy ( 'isExtension', 'ASC' )->orderBy ( 'order_no', 'ASC' )->get ();
+        // SELECT:T_STAFF（出勤中スタッフ）
+        $workToDayStaffs = DB::table ( 't_staffs' )
+                        ->join ( 't_work_days', function ($join) {
+                            $join->on( 't_work_days.staff_id', '=', 't_staffs.staff_id' );
+                        } )
+                        ->where ( 't_work_days.work_day', $today )
+                        ->where ('t_work_days.last_plan_time', '>', $timeNow)
+                        ->get ();
+        
+        return view ( 'reserve.search' )
+            ->with('shop', $shop)
+            ->with ( 'courses', $courses )
+            ->with ( 'appointments', $appointments )
+            ->with ( 'workToDayStaffs', $workToDayStaffs );
     }
 
     
-    public function search()
+    public function search(Request $request)
     {
-        //
+        $rules = [    // ②
+                        'course_id' => 'required',
+        ];
+        $this->validate($request, $rules);  // ③
+        $courseId = Input::get('course_id');
+        var_dump($courseId);
+        
         return view ( 'reserve.reserve' );
     }
     /**

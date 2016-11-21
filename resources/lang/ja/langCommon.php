@@ -6,6 +6,8 @@ return [
                 'PRICE' => '料金',
                 'RESERVE_DETAIL' => '予約内容',
                 'RESERVE_CONFIRM' => '予約確認',
+                'TIME' => '時間',
+                'EXTENSION' => '延長',
                 'TELL' => '電話番号',
                 'CHARGE_PRICE' => '指名料',
                 'COURSE_SELECT' => 'コース選択',
