@@ -81,9 +81,9 @@ class ReserveController extends Controller
             $appointments = TAppointments::where ( 'shop_id', $shopId )->where ( 'appointment_type', '0' )->first();
             // TODO レコード存在チェック
             
+            // 指名料加算
             $tatalPrice += $appointments->price;
         }
-        var_dump($tatalPrice);
         
         return view ( 'reserve.reserve' )
                 ->with ( 'course', $course )

@@ -25,7 +25,7 @@
           @include('layouts.common.requiredInput')
         </label>
         <div class="col-sm-7">
-        {!! Form::number('telephone', '09099999999', ['class' => 'form-control']) !!}
+        {!! Form::number('telephone', '', ['class' => 'form-control']) !!}
         <span class="help-block">{{$errors->first('telephone')}}</span>
         </div>
         <div class="col-sm-1"></div>

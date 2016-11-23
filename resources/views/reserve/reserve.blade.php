@@ -25,9 +25,9 @@
         <th>{!! Lang::get('langCommon.CHARGE') !!}</th>
         <td>
         @if (isset($staff))
-        {{{ $staff->name }}}&nbsp;-&nbsp;&#091;{{{ $staff->age }}}&#093;
+          {{{ $staff->name }}}&nbsp;-&nbsp;&#091;{{{ $staff->age }}}&#093;
         @else
-        指名なし
+          指名なし
         @endif
         </td>
       </tr>
@@ -82,19 +82,25 @@
     <tbody>
       <tr>
         <th>{!! Lang::get('langCommon.TELL') !!}</th>
-        <td>090xxxxxxxx</td>
+        <td>{{{ $telephone }}}</td>
       </tr>
       <tr>
         <th>{!! Lang::get('langCommon.CHARGE') !!}</th>
-        <td>アーティスト</td>
+        <td>
+        @if (isset($staff))
+          {{{ $staff->name }}}&nbsp;-&nbsp;&#091;{{{ $staff->age }}}&#093;
+        @else
+          指名なし
+        @endif
+        </td>
       </tr>
       <tr>
         <th>{!! Lang::get('langCommon.COURSE') !!}</th>
-        <td>カット</td>
+        <td>{{{ $course->course_name }}}&nbsp;-&nbsp;&#091;&yen;{{{ number_format($course->price) }}}&#093;</td>
       </tr>
       <tr>
-        <th>{!! Lang::get('langCommon.PRICE') !!}</th>
-        <td>¥5,000</td>
+        <th>{!! Lang::get('langCommon.TOTAL') !!}{!! Lang::get('langCommon.PRICE') !!}</th>
+        <td>&yen;{{{ number_format($tatalPrice) }}}</td>
       </tr>
       <tr>
         <th>{!! Lang::get('langCommon.RESERVE_TIME') !!}</th>
