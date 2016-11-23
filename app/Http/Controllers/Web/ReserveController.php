@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Crypt;
 use DB;
 use Input;
+Use Session;
 use App\Models\TShops;
 use App\Models\TCourses;
 use App\Models\TAppointments;
@@ -25,6 +26,7 @@ class ReserveController extends Controller
     {
         //
         $shopId = '1';
+        Session::put('shopId', $shopId);
         $today = '20161120';
         $timeNow = '1030';
         
@@ -53,14 +55,41 @@ class ReserveController extends Controller
     
     public function search(Request $request)
     {
-        $rules = [    // ②
-                        'course_id' => 'required',
+        $rules = [ 
+                        'telephone' => 'required',
+                        'course_id' => 'required' 
         ];
-        $this->validate($request, $rules);  // ③
-        $courseId = Input::get('course_id');
-        var_dump($courseId);
+        $this->validate ( $request, $rules );
         
-        return view ( 'reserve.reserve' );
+        $shopId = Session::get('shopId');
+        
+        // コース処理
+        $telephone = Input::get ( 'telephone' );
+        $courseId = Input::get ( 'course_id' );
+        $course = TCourses::where ( 'course_id', $courseId )->where ( 'shop_id', $shopId )->first();
+        // TODO レコード存在チェック
+        
+        // 合計金額
+        $tatalPrice = $course->price;
+        
+        // 指名処理
+        $staff_id = Input::get ( 'staff_id' );
+        $staff = null;
+        $appointments = null;
+        if (!empty($staff_id)) {
+            $staff = TStaffs::where ( 'staff_id', $staff_id )->where ( 'shop_id', $shopId )->first();
+            $appointments = TAppointments::where ( 'shop_id', $shopId )->where ( 'appointment_type', '0' )->first();
+            // TODO レコード存在チェック
+            
+            $tatalPrice += $appointments->price;
+        }
+        var_dump($tatalPrice);
+        
+        return view ( 'reserve.reserve' )
+                ->with ( 'course', $course )
+                ->with ( 'staff', $staff )
+                ->with ( 'tatalPrice', $tatalPrice)
+                ->with ('telephone', $telephone);
     }
     /**
      * Show the form for creating a new resource.

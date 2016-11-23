@@ -13,18 +13,21 @@
   <div class="panel-body">
 
     <div class="form-horizontal ">
-    {!! Lang::get('langDescription.reserve.search.INPUT_COURSE_DETAIL') !!}<br />
+    {!! Lang::get('langDescription.reserve.search.INPUT_COURSE_DETAIL') !!}<br /><br />
     {!! Lang::get('langDescription.reserve.search.CONFIRM_TELL') !!}
     <p />
     
       {{-- 電話番号 --}}
-      <div class="form-group">
+      <div class="form-group @if(!empty($errors->first('telephone'))) has-error @endif">
         <div class="col-sm-1"></div>
         <label for="name" class="control-label col-sm-3">
           {!! Lang::get('langCommon.TELL') !!}
           @include('layouts.common.requiredInput')
         </label>
-        <div class="col-sm-7">{!! Form::number('telephone', '09099999999', ['class' => 'form-control']) !!}</div>
+        <div class="col-sm-7">
+        {!! Form::number('telephone', '09099999999', ['class' => 'form-control']) !!}
+        <span class="help-block">{{$errors->first('telephone')}}</span>
+        </div>
         <div class="col-sm-1"></div>
       </div>
       
@@ -33,7 +36,7 @@
         <div class="col-sm-1"></div>
         <label for="name" class="control-label col-sm-3">{!! Lang::get('langCommon.CHARGE') !!}</label>
         <div class="col-sm-7">
-          <select class="form-control" id="name">
+          <select class="form-control"  id="staff_id" name="staff_id">
             <option value="">{!! Lang::get('langCommon.SELECT_DEFFAULT.CHARGE_NOTHING') !!}</option>
             @foreach($workToDayStaffs as $workToDayStaff)
             <option value="{{{ $workToDayStaff->staff_id }}}" >{{{ $workToDayStaff->name }}}&nbsp;-&nbsp;&#091;{{{ $workToDayStaff->age }}}&#093;</option>

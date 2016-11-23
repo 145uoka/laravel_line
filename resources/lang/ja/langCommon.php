@@ -4,6 +4,7 @@ return [
                 'CHARGE' => '指名',
                 'COURSE' => 'コース',
                 'PRICE' => '料金',
+                'TOTAL' => '合計',
                 'RESERVE_DETAIL' => '予約内容',
                 'RESERVE_CONFIRM' => '予約確認',
                 'TIME' => '時間',

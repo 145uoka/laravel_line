@@ -1,5 +1,5 @@
 <?php
 return [ 
-                'title' => 'JEWEL',
-                'home_name' => 'JEWEL',
+                'title' => 'Eternal Potion',
+                'home_name' => 'Eternal Potion',
 ];

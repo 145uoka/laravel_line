@@ -12,6 +12,7 @@ class CreateTAppointments extends Migration {
             // 基本カラム定義
             $table->increments ( 'appointment_id' )->comment ( '指名ID' );
             $table->integer ( 'shop_id' )->unsigned ()->comment ( '店舗ID' );
+            $table->string ( 'appointment_type', 1 )->comment ( '指名区分' );
             $table->integer ( 'order_no' )->nullable ()->comment ( '表示順' );
             $table->string ( 'display_name', 10 )->comment ( '表示名' );
             $table->smallInteger ( 'price' )->comment ( '料金' );

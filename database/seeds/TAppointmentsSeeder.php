@@ -18,7 +18,8 @@ class TAppointmentsSeeder extends Seeder {
                         'shop_id' => 1,
                         'order_no' => 1,
                         'display_name' => '指名',
-                        'price' => 1000 
+                        'price' => 1000,
+                        'appointment_type' => '0' 
         ) );
     }
 }

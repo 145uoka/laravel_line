@@ -104,6 +104,7 @@ return [
     */
 
     'attributes' => [
+                    'telephone' => Lang::get('langCommon.TELL'),
                     'course_id' => Lang::get('langCommon.COURSE'),
     ],
 
