@@ -123,6 +123,7 @@ class ReserveController extends Controller
                         'telephone' => $telephone,
                         'staff_id' => $staffId,
                         'user_id' => $userId,
+                        'tatalPrice' => $tatalPrice,
                         'date' => $date->format('Ymd')
         ];
         
@@ -183,8 +184,16 @@ class ReserveController extends Controller
         $reserve->end_time_minute = 670;
         $reserve->course_id = $session ['course_id'];
         $reserve->save();
-                        
-        return view ( 'home' );
+        
+        $course = TCourses::find ($session ['course_id']);
+        $staff = TStaffs::find ($session['staff_id']);
+        $tatalPrice = $session['tatalPrice'];
+                
+        return view ( 'reserve.store')
+            ->with ( 'reserve', $reserve )
+            ->with ( 'course', $course )
+            ->with ( 'staff', $staff )
+            ->with ( 'tatalPrice', $tatalPrice );
     }
 
     /**
