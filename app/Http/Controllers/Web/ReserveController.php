@@ -22,6 +22,18 @@ use App\Logic\AccessTokenManager;
 
 class ReserveController extends Controller
 {
+    
+    public $header = [];
+    private function getallheaders()
+    {
+        $header = '';
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $header[strtoupper(str_replace(' ', '-', ucwords(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+        $this->header = $header;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +41,12 @@ class ReserveController extends Controller
      */
     public function index($accessToken)
     {
+        $this->getallheaders();
+        for ($this->header : header) {
+            
+        }
+        var_dump($this->header);
+        
         $accessTokenManager = new AccessTokenManager();
         $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);
             

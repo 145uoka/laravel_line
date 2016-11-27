@@ -127,8 +127,8 @@ class LineCallbackController extends Controller {
                 $textMessageBuilder = new TextMessageBuilder ( $input );
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 
-                $compSig = $_SERVER['X-Line-Signature'];
-//                 fputs(STDOUT, $compSig);
+//                 $compSig = $_SERVER['X-Line-Signature'];
+                fputs(STDOUT, "aaaaa");
                 return;
             }
         } else {
