@@ -122,8 +122,8 @@ class LineCallbackController extends Controller {
                 ] ) ) ;
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
-                $headerValue = Request::header('X-Line-Signature');
-                $textMessageBuilder = new TextMessageBuilder ( $headerValue );
+                $compSig = $_SERVER['X-Line-Signature'];
+                $textMessageBuilder = new TextMessageBuilder ($compSig);
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
             }
