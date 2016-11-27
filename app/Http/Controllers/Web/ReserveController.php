@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 use Crypt;
 use DateTime;
@@ -17,7 +17,6 @@ use App\Models\TStaffs;
 use App\Models\TReserves;
 use App\Models\MLineChannels;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Request;
 use App\Logic\AccessTokenManager;
 
 class ReserveController extends Controller
@@ -145,8 +144,6 @@ class ReserveController extends Controller
         $workDay = TWorkDays::where ( 'shop_id', $shopId )->where ( 'staff_id', $staffId )->where ( 'work_day', $workDate )->get();
         $reserves = TReserves::where ( 'shop_id', $shopId )->where ( 'staff_id', $staffId )->where ( 'reserve_day', $workDate )->get();
         
-        var_dump($reserves);
-        
         return $workDay;
     }
     
@@ -172,10 +169,8 @@ class ReserveController extends Controller
         //
         
         $time = Input::get ( 'time' );
-        var_dump($time);
         
         $session = Session::get('SES_reserve');
-        var_dump($session['user_id']);
         
         $reserve = new TReserves;
         $reserve->user_id = $session ['user_id'];
