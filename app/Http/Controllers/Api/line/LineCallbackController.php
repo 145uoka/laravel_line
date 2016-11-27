@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\line;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
+use App\Models\MLineChannels;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
@@ -34,17 +35,28 @@ class LineCallbackController extends Controller {
         
         // inputの取得
         $input = file_get_contents ( 'php://input' );
+        
+        $lineChannelInfo = getLineChannelInfo($input);
+        if ($lineChannelInfo == null) {
+            return;
+        }
+        
         $json = json_decode ( $input );
         
         $event = $json->events [0];
         
         // line-bot
-        $httpClient = new CurlHTTPClient ( config ( 'lineSdk.CHANNEL_ACCESS_TOKEN' ) );
-        $bot = new LINEBot ( $httpClient, [ 
-                        'channelSecret' => config ( 'lineSdk.CHANNEL_SECRET' ) 
+//         $httpClient = new CurlHTTPClient ( config ( 'lineSdk.CHANNEL_ACCESS_TOKEN' ) );
+//         $bot = new LINEBot ( $httpClient, [ 
+//                         'channelSecret' => config ( 'lineSdk.CHANNEL_SECRET' ) 
+//         ] );
+        
+        $httpClient = new CurlHTTPClient ($lineChannelInfo->channel_access_token);
+        $bot = new LINEBot ( $httpClient, [
+                        'channelSecret' => $lineChannelInfo->channel_secret
         ] );
         
-        $shopId = 1; // dummy
+        $shopId = $lineChannelInfo->shop_id;
         $accessTokenManager = new AccessTokenManager();
         
         if ('user' == $event->source->type) {
@@ -136,5 +148,18 @@ class LineCallbackController extends Controller {
         return;
     }
     
-    
+    private function getLineChannelInfo($input) {
+        
+        $headerSignature = Request::header('X-LINE-SIGNATURE');
+        
+        $lineChannels = MLineChannels::all();
+        foreach ($lineChannels as $lineChannel) {
+            $signature = base64_encode(hash_hmac('sha256', $input, config ($lineChannel->channel_secret) , true));
+            if ($sig == $compSig) {
+                return $lineChannel;
+            }
+        }
+        
+        return null;
+    }
 }

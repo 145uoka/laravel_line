@@ -15,6 +15,7 @@ use App\Models\TAppointments;
 use App\Models\TWorkDays;
 use App\Models\TStaffs;
 use App\Models\TReserves;
+use App\Models\MLineChannels;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 use App\Logic\AccessTokenManager;
@@ -40,7 +41,8 @@ class ReserveController extends Controller
      */
     public function index($accessToken)
     {
-        var_dump(Request::header('CONNECTION'));
+        $lineChannels = MLineChannels::all();
+        var_dump($lineChannels);
         
         $accessTokenManager = new AccessTokenManager();
         $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);
