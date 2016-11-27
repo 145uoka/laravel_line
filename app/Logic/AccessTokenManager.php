@@ -1,19 +1,8 @@
 <?php
 namespace App\Logic;
 
-
 use DateTime;
-use DB;
-use Input;
-Use Session;
-use App\Models\TShops;
-use App\Models\TCourses;
-use App\Models\TAppointments;
-use App\Models\TWorkDays;
-use App\Models\TStaffs;
 use App\Models\TAccessTokens;
-use App\Http\Controllers\Controller;
-use phpDocumentor\Reflection\Types\This;
 
 class AccessTokenManager {
     

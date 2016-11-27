@@ -41,8 +41,6 @@ class ReserveController extends Controller
      */
     public function index($accessToken)
     {
-        $lineChannels = MLineChannels::all();
-        var_dump($lineChannels);
         
         $accessTokenManager = new AccessTokenManager();
         $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);

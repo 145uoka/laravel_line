@@ -15,6 +15,7 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
 use App\Logic\AccessTokenManager;
+use App\Logic\LineCallbackLogic;
 
 class LineCallbackController extends Controller {
     /**
@@ -37,6 +38,7 @@ class LineCallbackController extends Controller {
         $headerSignature = Request::header('X-LINE-SIGNATURE');
         $input = file_get_contents ( 'php://input' );
         
+        // LINE-BOTのチャンネル認証
         $lineChannelInfo = $this->getLineChannelInfo($headerSignature, $input);
         if ($lineChannelInfo == null) {
             return;
@@ -46,11 +48,9 @@ class LineCallbackController extends Controller {
         
         $event = $json->events [0];
         
-        // line-bot
-//         $httpClient = new CurlHTTPClient ( config ( 'lineSdk.CHANNEL_ACCESS_TOKEN' ) );
-//         $bot = new LINEBot ( $httpClient, [ 
-//                         'channelSecret' => config ( 'lineSdk.CHANNEL_SECRET' ) 
-//         ] );
+        // 発言ユーザの特定
+        $lineCallbackLogic = new LineCallbackLogic();
+        $user = $lineCallbackLogic->getUserInfo($event);
         
         $httpClient = new CurlHTTPClient ($lineChannelInfo->channel_access_token);
         $bot = new LINEBot ( $httpClient, [
@@ -113,7 +113,7 @@ class LineCallbackController extends Controller {
                         }
                     } else if ('予約' == $inputText) {
                         
-                        $userId = 1;
+                        $userId = $user->user_id;
                         $accessToken = $accessTokenManager->createToken(32, 5, $shopId, $userId);
                         
                         $tempA = new TemplateMessageBuilder ( 'alt', new ButtonTemplateBuilder ( '予約機能', '以下から行いたい操作を選択してください。', null, [ 
@@ -134,10 +134,7 @@ class LineCallbackController extends Controller {
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
-                $headerSignature = Request::header('X-LINE-SIGNATURE');
-                $hash = hash_hmac('sha256', $input, config ( 'lineSdk.CHANNEL_SECRET' )  , true);
-                $sig = base64_encode($hash);
-                $textMessageBuilder = new TextMessageBuilder ($headerSignature.'\n'.$sig);
+                $textMessageBuilder = new TextMessageBuilder ($input);
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 
 //                 $compSig = $_SERVER['X-Line-Signature'];
