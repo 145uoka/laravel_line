@@ -34,9 +34,10 @@ class LineCallbackController extends Controller {
     public function index() {
         
         // inputの取得
+        $headerSignature = Request::header('X-LINE-SIGNATURE');
         $input = file_get_contents ( 'php://input' );
         
-        $lineChannelInfo = $this->getLineChannelInfo($input);
+        $lineChannelInfo = $this->getLineChannelInfo($headerSignature, $input);
         if ($lineChannelInfo == null) {
             return;
         }
@@ -148,13 +149,11 @@ class LineCallbackController extends Controller {
         return;
     }
     
-    private function getLineChannelInfo($input) {
-        
-        $headerSignature = Request::header('X-LINE-SIGNATURE');
+    private function getLineChannelInfo($headerSignature, $input) {
         
         $lineChannels = MLineChannels::all();
         foreach ($lineChannels as $lineChannel) {
-            $signature = base64_encode(hash_hmac('sha256', $input, config ($lineChannel->channel_secret) , true));
+            $signature = base64_encode(hash_hmac('sha256', $input, $lineChannel->channel_secret, true));
             if ($signature == $lineChannels) {
                 return $lineChannel;
             }
