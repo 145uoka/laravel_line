@@ -111,6 +111,7 @@ class LineCallbackController extends Controller {
                         ] ) );
                         
                         $response = $bot->replyMessage ( $event->replyToken, $tempA );
+                        return;
                     }
                 }
                 
@@ -121,8 +122,13 @@ class LineCallbackController extends Controller {
                 ] ) ) ;
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
-                
-                $textMessageBuilder = new TextMessageBuilder ( $input );
+                $headerValue;
+                $headers = apache_request_headers();
+                foreach ( $headers as $header => $value ) {
+                    $headerValue = $headerValue.$header.":".$value."\\n";
+                }
+                var_dump($headers);
+                $textMessageBuilder = new TextMessageBuilder ( $headerValue );
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
             }
