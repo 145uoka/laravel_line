@@ -122,12 +122,7 @@ class LineCallbackController extends Controller {
                 ] ) ) ;
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
-                $headerValue;
-                $headers = apache_request_headers();
-                foreach ( $headers as $header => $value ) {
-                    $headerValue = $headerValue.$header.":".$value."\\n";
-                }
-                var_dump($headers);
+                $headerValue = Request::header('X-Line-Signature');
                 $textMessageBuilder = new TextMessageBuilder ( $headerValue );
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
