@@ -42,9 +42,6 @@ class ReserveController extends Controller
     public function index($accessToken)
     {
         $this->getallheaders();
-        for ($this->header : header) {
-            
-        }
         var_dump($this->header);
         
         $accessTokenManager = new AccessTokenManager();
