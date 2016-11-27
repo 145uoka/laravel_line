@@ -122,7 +122,7 @@ class LineCallbackController extends Controller {
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
                 $headerSignature = Request::header('X-LINE-SIGNATURE');
-                $hash = hash_hmac('sha256', $rawPost, config ( 'lineSdk.CHANNEL_SECRET' )  , true);
+                $hash = hash_hmac('sha256', $input, config ( 'lineSdk.CHANNEL_SECRET' )  , true);
                 $sig = base64_encode($hash);
                 $textMessageBuilder = new TextMessageBuilder ($headerSignature.'\n'.$sig);
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );

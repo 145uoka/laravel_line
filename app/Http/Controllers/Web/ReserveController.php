@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 use Crypt;
 use DateTime;
@@ -16,8 +16,7 @@ use App\Models\TWorkDays;
 use App\Models\TStaffs;
 use App\Models\TReserves;
 use App\Http\Controllers\Controller;
-use phpDocumentor\Reflection\Types\This;
-
+use Illuminate\Support\Facades\Request;
 use App\Logic\AccessTokenManager;
 
 class ReserveController extends Controller
@@ -41,8 +40,7 @@ class ReserveController extends Controller
      */
     public function index($accessToken)
     {
-        $this->getallheaders();
-        var_dump($this->header);
+        var_dump(Request::header('CONNECTION'));
         
         $accessTokenManager = new AccessTokenManager();
         $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);
