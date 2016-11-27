@@ -7,6 +7,7 @@ return [
                 'TOTAL' => '合計',
                 'RESERVE_DETAIL' => '予約内容',
                 'RESERVE_CONFIRM' => '予約確認',
+                'RESERVE_REGISTER' => '予約受付',
                 'TIME' => '時間',
                 'EXTENSION' => '延長',
                 'TELL' => '電話番号',

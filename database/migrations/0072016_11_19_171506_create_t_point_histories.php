@@ -19,7 +19,7 @@ class CreateTPointHistories extends Migration {
             $table->timestamps ();
             
             // FK
-            $table->foreign ( 'user_id' )->references ( 'id' )->on ( 'users' );
+            $table->foreign('user_id')->references('user_id')->on('t_users');
             $table->foreign ( 'shop_id' )->references ( 'shop_id' )->on ( 't_shops' )->onDelete ( 'cascade' );
         } );
     }

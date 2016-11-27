@@ -18,8 +18,8 @@ class CreateTShops extends Migration
             $table->string ( 'shop_name', 30 )->comment ( '店舗名' );
             $table->string ( 'telephone', 15 )->comment ( '電話番号' );
             $table->string ( 'address', 100 )->comment ( '住所' );
-            $table->string ( 'open_time', 10 )->nullable ()->comment ( '開店時間' );
-            $table->string ( 'close_time', 10 )->nullable ()->comment ( '閉店時間' );
+            $table->string ( 'open_time', 4 )->nullable ()->comment ( '開店時間' );
+            $table->string ( 'close_time', 4 )->nullable ()->comment ( '閉店時間' );
             $table->string ( 'reserve_start_time', 4 )->nullable ()->comment ( '予約受付開始時間' );
             $table->string ( 'reserve_end_time', 4 )->nullable ()->comment ( '予約受付終了時間' );
             $table->smallInteger ( 'reserve_start_time_minute' )->nullable ()->comment ( '予約受付開始時刻分' );

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TAppointmentsSeeder::class);
         $this->call(TStaffsSeeder::class);
         $this->call(TWorkDaysSeeder::class);
-        
+        $this->call(TUsersSeeder::class);
         Model::reguard();
     }
 }

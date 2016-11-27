@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use Illuminate\Http\Request;
 
 use Crypt;
+use DateTime;
 use DB;
 use Input;
 Use Session;
@@ -13,7 +14,11 @@ use App\Models\TCourses;
 use App\Models\TAppointments;
 use App\Models\TWorkDays;
 use App\Models\TStaffs;
+use App\Models\TReserves;
 use App\Http\Controllers\Controller;
+use phpDocumentor\Reflection\Types\This;
+
+use App\Logic\AccessTokenManager;
 
 class ReserveController extends Controller
 {
@@ -25,10 +30,20 @@ class ReserveController extends Controller
     public function index()
     {
         //
-        $shopId = '1';
-        Session::put('shopId', $shopId);
-        $today = '20161120';
-        $timeNow = '1030';
+        $userId = 1;
+        $shopId = 1;
+        
+        $accessTokenManager = new AccessTokenManager();
+        $accessTokenManager->createToken(32, 5, $shopId, $userId);
+        
+        Session::put('SES_user_id', $userId);
+        Session::put('SES_shop_id', $shopId);
+        
+        $date = new DateTime();
+        $today = $date->format('Ymd');
+        $today = '20161120'; // TODO dummy
+        $timeNow =  $date->format('Hi');
+        $timeNow = '1400'; // TODO dummy
         
         $shop = TShops::find ($shopId);
         
@@ -61,23 +76,24 @@ class ReserveController extends Controller
         ];
         $this->validate ( $request, $rules );
         
-        $shopId = Session::get('shopId');
+        $shopId = Session::get('SES_shop_id');
         
         // コース処理
         $telephone = Input::get ( 'telephone' );
         $courseId = Input::get ( 'course_id' );
-        $course = TCourses::where ( 'course_id', $courseId )->where ( 'shop_id', $shopId )->first();
+        $course = TCourses::find ($courseId );
+        
         // TODO レコード存在チェック
         
         // 合計金額
         $tatalPrice = $course->price;
         
         // 指名処理
-        $staff_id = Input::get ( 'staff_id' );
+        $staffId = Input::get ( 'staff_id' );
         $staff = null;
         $appointments = null;
-        if (!empty($staff_id)) {
-            $staff = TStaffs::where ( 'staff_id', $staff_id )->where ( 'shop_id', $shopId )->first();
+        if (!empty($staffId)) {
+            $staff = TStaffs::find ($staffId );
             $appointments = TAppointments::where ( 'shop_id', $shopId )->where ( 'appointment_type', '0' )->first();
             // TODO レコード存在チェック
             
@@ -85,12 +101,44 @@ class ReserveController extends Controller
             $tatalPrice += $appointments->price;
         }
         
+        
+        $date = new DateTime();
+        $this->searchReserveTime($shopId, $staffId, $date);
+        
+        $userId = Session::get('SES_user_id');
+        
+        $reserveSession = ['shop_id' => $shopId,
+                        'course_id' => $courseId,
+                        'telephone' => $telephone,
+                        'staff_id' => $staffId,
+                        'user_id' => $userId,
+                        'date' => $date->format('Ymd')
+        ];
+        
+        // 入力値をSessionへput
+        Session::put('SES_reserve', $reserveSession);
+        
         return view ( 'reserve.reserve' )
                 ->with ( 'course', $course )
                 ->with ( 'staff', $staff )
                 ->with ( 'tatalPrice', $tatalPrice)
                 ->with ('telephone', $telephone);
     }
+    
+    // TODO 予約可能時間
+    private function searchReserveTime($shopId, $staffId, $date) {
+        
+        $workDate = $date->format('Ymd');
+        
+        $workDay = TWorkDays::where ( 'shop_id', $shopId )->where ( 'staff_id', $staffId )->where ( 'work_day', $workDate )->get();
+        $reserves = TReserves::where ( 'shop_id', $shopId )->where ( 'staff_id', $staffId )->where ( 'reserve_day', $workDate )->get();
+        
+        var_dump($reserves);
+        
+        return $workDay;
+    }
+    
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -110,6 +158,26 @@ class ReserveController extends Controller
     public function store(Request $request)
     {
         //
+        
+        $time = Input::get ( 'time' );
+        var_dump($time);
+        
+        $session = Session::get('SES_reserve');
+        var_dump($session['user_id']);
+        
+        $reserve = new TReserves;
+        $reserve->user_id = $session ['user_id'];
+        $reserve->shop_id = $session ['shop_id'];
+        $reserve->staff_id = $session ['staff_id'];
+        $reserve->reserve_day = $session ['date'];
+        $reserve->start_time = $time;
+        $reserve->end_time = '1110';
+        $reserve->start_time_minute = 600;
+        $reserve->end_time_minute = 670;
+        $reserve->course_id = $session ['course_id'];
+        $reserve->save();
+                        
+        return view ( 'home' );
     }
 
     /**

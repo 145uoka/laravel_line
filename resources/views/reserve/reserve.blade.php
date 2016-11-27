@@ -8,7 +8,7 @@
 <H2>{!! Lang::get('langMenu.TITLE.RESERVE') !!}</H2>
 
 @endsection 
-@section('content_body') {!! Form::open(['url' => 'reserve/search']) !!}
+@section('content_body') {!! Form::open(['url' => 'reserve/store']) !!}
 <div class="panel panel-default">
   <table class="table table-bordered table-striped">
     <thead>
@@ -49,7 +49,8 @@
   {!! Lang::get('langDescription.reserve.reserve.SELECT_RESERVE_TIME') !!}
   <p/>
     <div class="list-group text-center">
-      <a class="list-group-item" data-toggle="modal" href="#myModal" data-whatever="10:00&nbsp;&#xFF5E;">10:00&nbsp;&#xFF5E;</a>
+      {!! Form::hidden('time', '', ['id' => 'time']) !!}
+      <a class="list-group-item" data-toggle="modal" href="#myModal" data-time="1000" data-whatever="10:00&nbsp;&#xFF5E;">10:00&nbsp;&#xFF5E;</a>
       <a class="list-group-item" data-toggle="modal" href="#myModal" data-whatever="11:00&nbsp;&#xFF5E;">11:00&nbsp;&#xFF5E;</a>
       <a class="list-group-item" data-toggle="modal" href="#myModal" data-whatever="13:00&nbsp;&#xFF5E;">13:00&nbsp;&#xFF5E;</a>
       <a class="list-group-item" data-toggle="modal" href="#myModal" data-whatever="17:00&nbsp;&#xFF5E;">17:00&nbsp;&#xFF5E;</a>
@@ -112,7 +113,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">キャンセル</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">予約受付</button>
+                
+                <button type="submit" class="btn btn-success">
+                  {!! Lang::get('formItem.RESERVE_REGISTER') !!}
+                </button>
             </div>
         </div>
     </div>
@@ -121,26 +125,16 @@
 <script>
   (function($) {
     'use strict';
-    // JavaScript で表示
-//     $('#staticModalButton').on('click', function() {
-//       $('#staticModal').modal();
-//     });
     // ダイアログ表示前にJavaScriptで操作する
     $('#myModal').on('show.bs.modal', function(event) {
       var button = $(event.relatedTarget);
       var recipient = button.data('whatever');
+      var time = button.data('time');
+      $("#time").val(time);
       var modal = $(this);
       modal.find('.modal-body .recipient').text(recipient);
       //modal.find('.modal-body input').val(recipient);
     });
-    // ダイアログ表示直後にフォーカスを設定する
-//     $('#myModal').on('shown.bs.modal', function(event) {
-//       $(this).find('.modal-footer .btn-default').focus();
-//     });
-//     $('#staticModal').on('click', '.modal-footer .btn-primary', function() {
-//       $('#staticModal').modal('hide');
-//       alert('変更を保存をクリックしました。');
-//     });
   })(jQuery);
   </script>
 {!! Form::close() !!}

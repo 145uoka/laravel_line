@@ -15,8 +15,8 @@ class CreateTReserves extends Migration {
             $table->integer ( 'shop_id' )->unsigned ()->comment ( '店舗ID' );
             $table->integer ( 'staff_id' )->nullable ()->unsigned ()->comment ( 'スタッフID' );
             $table->date ( 'reserve_day' )->comment ( '予約日' );
-            $table->date ( 'start_time' )->comment ( '開始時刻' );
-            $table->date ( 'end_time' )->comment ( '終了時刻' );
+            $table->string ( 'start_time', 4 )->comment ( '開始時刻' );
+            $table->string ( 'end_time', 4 )->comment ( '終了時刻' );
             $table->smallInteger ( 'start_time_minute' )->comment ( '開始時刻分' );
             $table->smallInteger ( 'end_time_minute' )->comment ( '終了時刻分' );
             $table->integer ( 'course_id' )->nullable ()->unsigned ()->comment ( 'コースID' );
@@ -26,11 +26,11 @@ class CreateTReserves extends Migration {
             $table->timestamps ();
             
             // FK
-            $table->foreign ( 'user_id' )->references ( 'id' )->on ( 'users' );
+            $table->foreign ( 'user_id' )->references ( 'user_id' )->on ( 't_users' );
             $table->foreign ( 'shop_id' )->references ( 'shop_id' )->on ( 't_shops' )->onDelete ( 'cascade' );
             $table->foreign ( 'staff_id' )->references ( 'staff_id' )->on ( 't_staffs' );
             $table->foreign ( 'course_id' )->references ( 'course_id' )->on ( 't_courses' );
-            $table->foreign('appointment_id')->references('appointment_id')->on('t_appointments');
+            $table->foreign ( 'appointment_id' )->references ( 'appointment_id' )->on ( 't_appointments' );
         } );
     }
     

@@ -19,7 +19,7 @@ class CreateTBlackLists extends Migration {
             
             // FK
             $table->foreign ( 'shop_id' )->references ( 'shop_id' )->on ( 't_shops' )->onDelete ( 'cascade' );
-            $table->foreign ( 'user_id' )->references ( 'id' )->on ( 'users' )->onDelete ( 'cascade' );
+            $table->foreign('user_id')->references('user_id')->on('t_users')->onDelete('cascade');
         } );
     }
     

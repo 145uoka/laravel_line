@@ -13,6 +13,7 @@ use LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
+use App\Logic\AccessTokenManager;
 
 use Illuminate\Http\Request;
 
@@ -44,6 +45,9 @@ class LineCallbackController extends Controller {
         $bot = new LINEBot ( $httpClient, [ 
                         'channelSecret' => config ( 'lineSdk.CHANNEL_SECRET' ) 
         ] );
+        
+        $shopId = 1; // dummy
+        $accessTokenManager = new AccessTokenManager();
         
         if ('user' == $event->source->type) {
             
@@ -97,8 +101,12 @@ class LineCallbackController extends Controller {
                             return;
                         }
                     } else if ('予約' == $inputText) {
+                        
+                        $userId = 1;
+                        $accessToken = $accessTokenManager->createToken(32, 5, $shopId, $userId);
+                        
                         $tempA = new TemplateMessageBuilder ( 'alt', new ButtonTemplateBuilder ( '予約機能', '以下から行いたい操作を選択してください。', null, [ 
-                                        new UriTemplateActionBuilder ( '予約受付', 'https://laravel-line.herokuapp.com/reserve' ),
+                                        new UriTemplateActionBuilder ( '予約受付', 'https://laravel-line.herokuapp.com/reserve/'.$accessToken ),
                                         new PostbackTemplateActionBuilder ( "予約確認", "1" )
                         ] ) );
                         
@@ -122,4 +130,6 @@ class LineCallbackController extends Controller {
         }
         return;
     }
+    
+    
 }
