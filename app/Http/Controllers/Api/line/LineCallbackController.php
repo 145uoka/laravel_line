@@ -27,6 +27,18 @@ class LineCallbackController extends Controller {
         // $this->middleware('auth');
     }
     
+    public $header = [];
+    private function getallheaders()
+    {
+        $header = '';
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $header[strtoupper(str_replace(' ', '-', ucwords(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+        $this->header = $header;
+    }
+    
     /**
      * LineBotからのCallBack処理
      *
@@ -123,12 +135,12 @@ class LineCallbackController extends Controller {
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
-                
-                $textMessageBuilder = new TextMessageBuilder ( $input );
+                $this->getallheaders();
+                $textMessageBuilder = new TextMessageBuilder ( $this->header["X-LINE-SIGNATURE"] );
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 
 //                 $compSig = $_SERVER['X-Line-Signature'];
-                fputs(STDOUT, "aaaaa");
+//                 fputs(STDOUT, "aaaaa");
                 return;
             }
         } else {
