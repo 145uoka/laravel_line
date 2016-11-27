@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\line;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Request;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
@@ -14,8 +14,6 @@ use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ConfirmTemplateBuilder;
 use App\Logic\AccessTokenManager;
-
-use Illuminate\Http\Request;
 
 class LineCallbackController extends Controller {
     /**
@@ -135,8 +133,8 @@ class LineCallbackController extends Controller {
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
-                $this->getallheaders();
-                $textMessageBuilder = new TextMessageBuilder ( $this->header["X-LINE-SIGNATURE"] );
+                $headerSignature = Request::header('X-LINE-SIGNATURE');
+                $textMessageBuilder = new TextMessageBuilder ($headerSignature);
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 
 //                 $compSig = $_SERVER['X-Line-Signature'];
