@@ -36,7 +36,7 @@ class LineCallbackController extends Controller {
         // inputの取得
         $input = file_get_contents ( 'php://input' );
         
-        $lineChannelInfo = getLineChannelInfo($input);
+        $lineChannelInfo = $this->getLineChannelInfo($input);
         if ($lineChannelInfo == null) {
             return;
         }
