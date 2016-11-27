@@ -115,17 +115,20 @@ class LineCallbackController extends Controller {
                     }
                 }
                 
-//                 $tempA = new TemplateMessageBuilder ( 'alt',
-//                                 new ButtonTemplateBuilder ( 'title', 'text', null,  [
-//                                 new PostbackTemplateActionBuilder ( "はい", "1" ),
-//                                 new UriTemplateActionBuilder ( '予約', 'https://laravel-line.herokuapp.com/reserve' )
-//                 ] ) ) ;
+                $tempA = new TemplateMessageBuilder ( 'alt',
+                                new ButtonTemplateBuilder ( 'title', 'text', null,  [
+                                new PostbackTemplateActionBuilder ( "はい", "1" ),
+                                new UriTemplateActionBuilder ( '予約', 'https://laravel-line.herokuapp.com/reserve' )
+                ] ) ) ;
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
-                $compSig = $_SERVER['X-Line-Signature'];
-                fputs(STDOUT, $compSig);
-                $textMessageBuilder = new TextMessageBuilder ($compSig);
+                
+                
+                $textMessageBuilder = new TextMessageBuilder ( $input );
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
+                
+                $compSig = $_SERVER['X-Line-Signature'];
+//                 fputs(STDOUT, $compSig);
                 return;
             }
         } else {
