@@ -46,6 +46,11 @@ class AccessTokenManager {
     public function createToken($size, $effectivePeriod, $shopId, $userId) {
         
         $accessToken = str_random($size);
+        $count = TAccessTokens::where('access_token', $accessToken)->count();
+        while ($count > 0) {
+            $accessToken = str_random($size);
+            $count = TAccessTokens::where('access_token', $accessToken)->count();
+        }
         
         $expirationDate = new DateTime();
         $expirationDate->modify('+' . $effectivePeriod .' minute');

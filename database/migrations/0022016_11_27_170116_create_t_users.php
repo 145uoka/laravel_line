@@ -15,7 +15,7 @@ class CreateTUsers extends Migration
         Schema::create('t_users', function (Blueprint $table) {
             // 基本カラム定義
             $table->increments ( 'user_id' )->comment ( 'ユーザーID' );
-            $table->string ( 'hash_user_id', 64 )->comment ( 'HASHユーザID' );
+            $table->string('hash_user_id', 64)->unique()->comment ( 'HASHユーザID');
             $table->string ( 'line_mid', 40 )->comment ( 'LINE MID' );
             $table->string ( 'role', 1 )->comment ( 'ロール' );
             $table->timestamps();

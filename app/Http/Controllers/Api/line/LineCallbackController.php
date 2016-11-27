@@ -34,6 +34,8 @@ class LineCallbackController extends Controller {
      */
     public function index() {
         
+    $headers = apache_request_headers();
+        
         // inputの取得
         $input = file_get_contents ( 'php://input' );
         $json = json_decode ( $input );
@@ -122,7 +124,13 @@ class LineCallbackController extends Controller {
                 
 //                 $response = $bot->replyMessage ( $event->replyToken, $tempA);
                 
-                $textMessageBuilder = new TextMessageBuilder ( $input );
+                
+                $headerValue;
+                foreach ( $headers as $header => $value ) {
+                    $headerValue = $headerValue.$header."\\n";
+                }
+                
+                $textMessageBuilder = new TextMessageBuilder ( $headerValues );
                 $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
                 return;
             }

@@ -15,7 +15,7 @@ class CreateTAccessTokens extends Migration
         Schema::create('t_access_tokens', function (Blueprint $table) {
             // 基本カラム定義
             $table->string ( 'access_token', 64 )->comment ( 'アクセストークン' );
-            $table->date ( 'expiration_date' )->comment ( '有効期限' );
+            $table->timestamp('expiration_date')->comment ( '有効期限');
             $table->integer('effective_period')->unsigned()->comment ( '有効期間');
             $table->integer ( 'shop_id' )->unsigned ()->comment ( '店舗ID' );
             $table->integer ( 'user_id' )->unsigned ()->comment ( 'ユーザID' );

@@ -27,14 +27,13 @@ class ReserveController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($accessToken)
     {
-        //
-        $userId = 1;
-        $shopId = 1;
-        
         $accessTokenManager = new AccessTokenManager();
-        $accessTokenManager->createToken(32, 5, $shopId, $userId);
+        $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);
+            
+        $userId = $accessTokenInfo->user_id;
+        $shopId = $accessTokenInfo->shop_id;
         
         Session::put('SES_user_id', $userId);
         Session::put('SES_shop_id', $shopId);

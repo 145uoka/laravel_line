@@ -16,6 +16,7 @@ class TShopsSeeder extends Seeder {
         // INSERT文
         TShops::create ( array (
                         'shop_id' => 1,
+                        'hash_shop_id' => 'ddd',
                         'shop_name' => 'JEWEL',
                         'telephone' => 'xxxx-xxx-xxxx',
                         'address' => 'yyyyzzzzxxxx' 

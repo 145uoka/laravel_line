@@ -15,6 +15,7 @@ class CreateTShops extends Migration
         Schema::create('t_shops', function (Blueprint $table) {
             // 基本カラム定義
             $table->increments ( 'shop_id' )->comment ( '店舗ID' );
+            $table->string('hash_shop_id', 32)->unique()->comment ( 'HASH店舗ID');
             $table->string ( 'shop_name', 30 )->comment ( '店舗名' );
             $table->string ( 'telephone', 15 )->comment ( '電話番号' );
             $table->string ( 'address', 100 )->comment ( '住所' );
