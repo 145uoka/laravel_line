@@ -155,7 +155,7 @@ class LineCallbackController extends Controller {
         $lineChannels = MLineChannels::all();
         foreach ($lineChannels as $lineChannel) {
             $signature = base64_encode(hash_hmac('sha256', $input, config ($lineChannel->channel_secret) , true));
-            if ($sig == $compSig) {
+            if ($signature == $lineChannels) {
                 return $lineChannel;
             }
         }
