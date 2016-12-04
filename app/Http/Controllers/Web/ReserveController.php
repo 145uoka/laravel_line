@@ -18,21 +18,10 @@ use App\Models\TReserves;
 use App\Models\MLineChannels;
 use App\Http\Controllers\Controller;
 use App\Logic\AccessTokenManager;
+use App\Logic\TimeCalculationLogic;
 
 class ReserveController extends Controller
 {
-    
-    public $header = [];
-    private function getallheaders()
-    {
-        $header = '';
-        foreach ($_SERVER as $name => $value) {
-            if (substr($name, 0, 5) == 'HTTP_') {
-                $header[strtoupper(str_replace(' ', '-', ucwords(str_replace('_', ' ', substr($name, 5)))))] = $value;
-            }
-        }
-        $this->header = $header;
-    }
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +29,11 @@ class ReserveController extends Controller
      */
     public function index($accessToken)
     {
+        $timeCalculationLogic = new TimeCalculationLogic();
+        $unitTime = $timeCalculationLogic->convertUnitTime(705, 15);
+        $hoge = $timeCalculationLogic->convertElapsedMinuteToHourMinute($unitTime);
+        var_dump($unitTime);
+        var_dump($hoge);
         
         $accessTokenManager = new AccessTokenManager();
         $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);

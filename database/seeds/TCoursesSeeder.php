@@ -20,7 +20,7 @@ class TCoursesSeeder extends Seeder {
                         'course_name' => '40分コース',
                         'minute' => 40,
                         'price' => 4000,
-                        'isExtension' => false 
+                        'is_extension' => '0' 
         ) );
         
         TCourses::create ( array (
@@ -29,7 +29,7 @@ class TCoursesSeeder extends Seeder {
                         'course_name' => '70分コース',
                         'minute' => 70,
                         'price' => 7000,
-                        'isExtension' => false 
+                        'is_extension' => '0' 
         ) );
         
         TCourses::create ( array (
@@ -38,7 +38,7 @@ class TCoursesSeeder extends Seeder {
                         'course_name' => '100分コース',
                         'minute' => 100,
                         'price' => 10000,
-                        'isExtension' => false 
+                        'is_extension' => '0' 
         ) );
         
         TCourses::create ( array (
@@ -47,7 +47,7 @@ class TCoursesSeeder extends Seeder {
                         'course_name' => '130分コース',
                         'minute' => 130,
                         'price' => 13000,
-                        'isExtension' => false 
+                        'is_extension' => '0' 
         ) );
         
         TCourses::create ( array (
@@ -56,7 +56,7 @@ class TCoursesSeeder extends Seeder {
                         'course_name' => '20分',
                         'minute' => 20,
                         'price' => 3000,
-                        'isExtension' => true 
+                        'is_extension' => '1' 
         ) );
         
         TCourses::create ( array (
@@ -65,7 +65,7 @@ class TCoursesSeeder extends Seeder {
                         'course_name' => '40分',
                         'minute' => 40,
                         'price' => 5000,
-                        'isExtension' => true 
+                        'is_extension' => '1' 
         ) );
     }
 }

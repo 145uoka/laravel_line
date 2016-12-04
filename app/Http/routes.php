@@ -29,3 +29,16 @@ Route::get ( 'push', 'Sample\SendMsgController@index' );
 Route::get ( 'reserve/{accessToken}', 'Web\ReserveController@index' );
 Route::post ( 'reserve/search', 'Web\ReserveController@search' );
 Route::post ( 'reserve/store', 'Web\ReserveController@store' );
+
+Route::get ( 'mng/menu/', 'Web\Maneger\MenuController@index' );
+Route::get ( 'mng/shop/', 'Web\Maneger\MngShopController@index' );
+Route::post ( 'mng/shop/update/', 'Web\Maneger\MngShopController@update' );
+Route::get ( 'mng/line/', 'Web\Maneger\LineController@index' );
+Route::get ( 'mng/course/', 'Web\Maneger\CoursesController@index' );
+Route::get ( 'mng/course/create', function () {
+    return view ( 'manager.course.create' );
+} );
+Route::post ( '/mng/course/store', 'Web\Maneger\CoursesController@store' );
+Route::post ( '/mng/course/update', 'Web\Maneger\CoursesController@update' );
+Route::get ( '/mng/course/destroy/{id}', 'Web\Maneger\CoursesController@destroy' );
+

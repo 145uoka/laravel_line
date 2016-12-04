@@ -17,7 +17,7 @@ class CreateTCourses extends Migration {
             $table->string ( 'detail', 50 )->nullable ()->comment ( '内容' );
             $table->integer ( 'minute' )->comment ( '時間' );
             $table->smallInteger ( 'price' )->comment ( '料金' );
-            $table->boolean ( 'isExtension' )->comment ( '延長フラグ' );
+            $table->string('is_extension', 1)->comment ( '延長フラグ');
             $table->timestamps ();
             
             // FK

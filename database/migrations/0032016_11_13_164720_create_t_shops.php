@@ -26,7 +26,7 @@ class CreateTShops extends Migration
             $table->smallInteger ( 'reserve_start_time_minute' )->nullable ()->comment ( '予約受付開始時刻分' );
             $table->smallInteger ( 'reserve_end_time_minute' )->nullable ()->comment ( '予約受付終了時間分' );
             $table->smallInteger ( 'resere_availabe_before_day' )->nullable ()->comment ( '予約受付可能営業日前' );
-            $table->boolean ( 'is_parking' )->nullable ()->comment ( '駐車場有無' );
+            $table->string('is_parking', 1)->nullable()->comment ( '駐車場有無');
             $table->text ( 'introduction' )->nullable ()->comment ( '説明文' );
             $table->integer ( 'area_id' )->nullable ()->unsigned ()->comment ( 'エリアID' );
             $table->timestamps ();

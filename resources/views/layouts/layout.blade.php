@@ -2,7 +2,11 @@
 <html lang="jp">
 <head>
 @yield('httpHeader')
-<title>{!! Lang::get('langApp.title') !!}</title>
+<title>
+@if (Session::has('SES_SHOP_INFO'))
+  {!! Session::get('SES_SHOP_INFO')['t_shop']->shop_name !!}
+@endif
+</title>
 
 <style>
 body {
@@ -20,7 +24,23 @@ body {
     <div class="container-fluid">
       <div class="navbar-header">
         <!-- Branding Image -->
-        <span class="navbar-brand">{!! Lang::get('langApp.home_name') !!} </span>
+        @if (Session::has('SES_LOGIN_INFO'))
+          @if (Session::get('SES_LOGIN_INFO')['isMngRole'])
+          <a class="navbar-brand" href="{{ url('/mng/menu/') }}">
+          @else
+          <span class="navbar-brand">
+          @endif
+        @endif
+        @if (Session::has('SES_SHOP_INFO'))
+          {!! Session::get('SES_SHOP_INFO')['t_shop']->shop_name !!}
+        @endif
+        @if (Session::has('SES_LOGIN_INFO'))
+          @if (Session::get('SES_LOGIN_INFO')['isMngRole'])
+          </a>
+          @else
+          </span>
+          @endif
+        @endif
       </div>
 
     </div>
