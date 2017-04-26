@@ -86,7 +86,7 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-          @if ($course->isExtension == 0)
+          @if ($course->isExtension === 0)
             <tr>
               <td class="text-center">{{{ $course->course_name }}}</td>
               <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
@@ -104,7 +104,7 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-          @if ($course->isExtension == 1)
+          @if ($course->isExtension === '1')
             <tr>
               <td class="text-center">{{{ $course->course_name }}}</td>
               <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
