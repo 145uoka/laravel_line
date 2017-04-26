@@ -104,7 +104,7 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-          @if ($course->isExtension === '1')
+          @if (strcmp($course->isExtension, "1") !== 0)
             <tr>
               <td class="text-center">{{{ $course->course_name }}}</td>
               <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
