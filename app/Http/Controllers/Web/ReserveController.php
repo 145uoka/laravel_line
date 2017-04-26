@@ -32,8 +32,8 @@ class ReserveController extends Controller
         $timeCalculationLogic = new TimeCalculationLogic();
         $unitTime = $timeCalculationLogic->convertUnitTime(705, 15);
         $hoge = $timeCalculationLogic->convertElapsedMinuteToHourMinute($unitTime);
-        var_dump($unitTime);
-        var_dump($hoge);
+//         var_dump($unitTime);
+//         var_dump($hoge);
         
         $accessTokenManager = new AccessTokenManager();
         $accessTokenInfo = $accessTokenManager->getAccessTokenInfo($accessToken);
@@ -56,6 +56,7 @@ class ReserveController extends Controller
         $appointments = TAppointments::where ( 'shop_id', $shopId )->orderBy ( 'order_no', 'ASC' )->get ();
         // SELECT:T_コース
         $courses = TCourses::where ( 'shop_id', $shopId )->orderBy ( 'is_extension', 'ASC' )->orderBy ( 'order_no', 'ASC' )->get ();
+        var_dump($courses);
         // SELECT:T_STAFF（出勤中スタッフ）
         $workToDayStaffs = DB::table ( 't_staffs' )
                         ->join ( 't_work_days', function ($join) {
