@@ -56,7 +56,6 @@ class ReserveController extends Controller
         $appointments = TAppointments::where ( 'shop_id', $shopId )->orderBy ( 'order_no', 'ASC' )->get ();
         // SELECT:T_コース
         $courses = TCourses::where ( 'shop_id', $shopId )->orderBy ( 'is_extension', 'ASC' )->orderBy ( 'order_no', 'ASC' )->get ();
-        var_dump($courses);
         // SELECT:T_STAFF（出勤中スタッフ）
         $workToDayStaffs = DB::table ( 't_staffs' )
                         ->join ( 't_work_days', function ($join) {
