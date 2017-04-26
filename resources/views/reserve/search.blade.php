@@ -56,7 +56,7 @@
           <select class="form-control" id="course_id" name="course_id">
               <option value="">{!! Lang::get('langCommon.SELECT_DEFFAULT.COURSE') !!}</option>
               @foreach($courses as $course)
-                @if ($course->is_extension == '0')
+                @if ($course->is_extension == "0")
                   <option value="{{{ $course->course_id }}}" >{{{ $course->course_name }}}&nbsp;-&nbsp;&#091;&yen;{{{ number_format($course->price) }}}&#093;</option>
                 @endif
               @endforeach
@@ -104,9 +104,9 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-          @if (strcmp($course->is_extension, '1') !== 0)
+          @if ($course->is_extension == "1")
             <tr>
-              <td class="text-center">{{{ $course->is_extension }}}</td>
+              <td class="text-center">{{{ $course->course_name }}}</td>
               <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
             </tr>
           @endif
