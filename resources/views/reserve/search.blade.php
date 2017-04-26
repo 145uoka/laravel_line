@@ -86,12 +86,12 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-          @if ($course->isExtension === false)
+<!--           @if ($course->isExtension === false) -->
             <tr>
               <td class="text-center">{{{ $course->course_name }}}</td>
               <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
             </tr>
-          @endif
+<!--           @endif -->
         @endforeach
       </tbody>
     </table>
@@ -104,12 +104,12 @@
       </thead>
       <tbody>
         @foreach($courses as $course)
-          @if ($course->isExtension === true)
+<!--           @if ($course->isExtension === true) -->
             <tr>
               <td class="text-center">{{{ $course->course_name }}}</td>
               <td class="text-center">&yen;{{{ number_format($course->price) }}}</td>
             </tr>
-          @endif
+<!--           @endif -->
         @endforeach
       </tbody>
     </table>
