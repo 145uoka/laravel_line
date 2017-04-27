@@ -123,6 +123,14 @@ class LineCallbackController extends Controller {
                         
                         $response = $bot->replyMessage ( $event->replyToken, $tempA );
                         return;
+                    } else if ('予約1' == $inputText) {
+                        
+                        $userId = $user->user_id;
+                        $accessToken = $accessTokenManager->createToken ( 32, 5, $shopId, $userId );
+                        
+                        $textMessageBuilder = new TextMessageBuilder ('https://laravel-line.herokuapp.com/reserve/' . $accessToken);
+                        $response = $bot->replyMessage ( $event->replyToken, $textMessageBuilder );
+                        return;
                     }
                 }
                 
